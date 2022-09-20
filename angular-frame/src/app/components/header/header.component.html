@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <button mat-button class="header-title">Angular Frame</button>
+  <!-- <button mat-button class="header-btn">
+    User
+  </button>
+  <button mat-button class="header-btn">
+    Post
+  </button>
+  <span class="spacer"></span>
+  <button mat-button class="header-btn">
+    Create User
+  </button>
+  <button mat-button class="header-btn" style="text-transform: capitalie;">
+    {{name}}
+  </button> -->
+  <span class="spacer"></span>
+  <button *ngIf="userLoginData" mat-icon-button class="header-btn" (click)="logout()">
+    Logout
+  </button>
+</mat-toolbar>

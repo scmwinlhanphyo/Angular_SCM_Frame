@@ -1,0 +1,33 @@
+<div class="login-container">
+  <h2>Angular Frame</h2>
+  <div class="form-container">
+    <div class="error-alert" *ngIf="loginErrMsg">{{loginErrMsg}}</div>
+    <div class="alert-success" *ngIf="resetMail">{{ resetMail }}</div>
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+
+
+      <label>Email Address:</label>
+      <mat-form-field appearance="outline">
+        <input matInput type="email" formControlName="email">
+        <mat-error *ngIf="myLoginForm['email'].hasError('required')">{{MessageUtil.emailEmpty}}</mat-error>
+        <mat-error *ngIf="myLoginForm['email'].hasError('pattern')">{{MessageUtil.emailFormatInvalid}}</mat-error>
+        <mat-error *ngIf="myLoginForm['email'].hasError('maxlength')">{{MessageUtil.emailMaxLength}}</mat-error>
+      </mat-form-field>
+
+      <label>Password:</label>
+      <mat-form-field appearance="outline">
+        <input matInput type="password" formControlName="password">
+        <mat-error *ngIf="myLoginForm['password'].hasError('required')">{{MessageUtil.passwordEmpty}}</mat-error>
+        <mat-error *ngIf="myLoginForm['password'].hasError('maxlength')">{{MessageUtil.passwordMaxLength}}</mat-error>
+      </mat-form-field>
+      <div class="checkforget">
+        <mat-checkbox class="remember" color="primary" formControlName="rememberme">Remember Me</mat-checkbox>
+      </div>
+      <div class="login-btn">
+        <button mat-raised-button color="primary" [disabled]="!loginForm.valid">
+          Log in
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

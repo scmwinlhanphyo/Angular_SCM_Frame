@@ -1,0 +1,2 @@
+PORT=3000
+DATABASE=mongodb+srv://scmwinlhanphyo:cuhYHmD2P8GcNMQi@cluster0.uub1isn.mongodb.net/AngularBulletin?retryWrites=true&w=majority
