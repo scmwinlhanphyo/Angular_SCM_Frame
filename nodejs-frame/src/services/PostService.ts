@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import Post from '../models/Post';
 import { validationResult } from 'express-validator';
 import { PostCreate } from '../interfaces/Post';
+import { logger } from '../logger/logger';
 
 /**
  * get post service.
@@ -20,10 +21,12 @@ export const getPostService = async (
     const posts = await Post.find(condition);
     res.json({ data: posts, status: 1 });
   } catch (err: any) {
-    console.log('err', err);
+    logger.error('GET Post API Error');
+    logger.error(err);
     if (!err.statusCode) {
       err.statusCode = 500;
     }
+    res.status(403).json({ message: 'GET Post API Error', status: 1 });
   }
 };
 
@@ -52,9 +55,12 @@ export const createPostService = async (req: Request, res: Response, _next: Next
       .status(201)
       .json({ message: "Created Successfully!", data: result, status: 1 });
   } catch (err: any) {
+    logger.error('Create Post API Error');
+    logger.error(err);
     if (!err.statusCode) {
       err.statusCode = 500;
     }
+    res.status(403).json({ message: 'Create Post API Error', status: 1 });
   }
 };
 
@@ -78,12 +84,14 @@ export const findPostService = async (
     }
     res.json({ data: post, status: 1 });
   } catch (err: any) {
+    logger.error('GET Post with id API Error');
+    logger.error(err);
     if (!err.statusCode) {
       err.statusCode = 500;
     }
     res
       .status(404)
-      .json({ message: "Post not found!", status: 0 });
+      .json({ message: "GET Post with id API Error", status: 0 });
   }
 }
 
@@ -117,9 +125,12 @@ export const updatePostService = async (
     const result = await post.save();
     res.json({ message: "Updated Successfully!", data: result, status: 1 });
   } catch (err: any) {
+    logger.error('Update Post API Error');
+    logger.error(err);
     if (!err.statusCode) {
       err.statusCode = 500;
     }
+    res.status(403).json({ data: 'Update Post API Error', status: 1 });
   }
 };
 
@@ -145,9 +156,12 @@ export const deletePostService = async (
     await post.save();
     res.json({ message: "Deleted Successfully!", status: 1 });
   } catch (err: any) {
+    logger.error('Delete Post API Error');
+    logger.error(err);
     if (!err.statusCode) {
       err.statusCode = 500;
     }
+    res.status(403).json({ data: 'Delete Post API Error', status: 1 });
   }
 };
 
@@ -167,8 +181,11 @@ export const findByNameService = async (
     const posts = await Post.find(condition);
     res.json({ data: posts, status: 1 });
   } catch (err: any) {
+    logger.error('Search Post with title keyword API Error');
+    logger.error(err);
     if (!err.statusCode) {
       err.statusCode = 500;
     }
+    res.status(403).json({ data: 'Search Post with title keyword API Error', status: 1 });
   }
 }
