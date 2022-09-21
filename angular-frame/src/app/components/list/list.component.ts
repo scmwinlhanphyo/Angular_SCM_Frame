@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { PostDataModel } from 'src/app/interfaces/post/post';
+import { Post } from 'src/app/model/post/post';
 import { PostService } from 'src/app/services/post.service';
 
 
@@ -19,7 +19,7 @@ export class ListComponent implements OnInit {
     'operation',
   ];
   actualPaginator?: MatPaginator;
-  public dataSource = new MatTableDataSource<PostDataModel>();
+  public dataSource = new MatTableDataSource<Post>();
   currentPage = 0;
   totalSize = 0;
   pageSize = 5;

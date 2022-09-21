@@ -1,14 +1,15 @@
 import express from "express";
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import post_route from './routes/post_route';
-import auth_route from './routes/auth_route';
 import passport from 'passport';
 import bodyParser from 'body-parser';
-import error from './middlewares/error';
 import cors from 'cors';
 import * as swaggerUI from 'swagger-ui-express';
 import * as YAML from 'yamljs';
+import error from './middlewares/error';
+import post_route from './routes/post_route';
+import auth_route from './routes/auth_route';
+import * as PassportJWTConfig from './config/passport';
 
 dotenv.config();
 
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(passport.initialize());
-require('./config/passport');
+PassportJWTConfig;
 
 mongoose
   .connect(process.env.DATABASE || "")
